@@ -1,27 +1,28 @@
 import os
 from collections import Counter
+import unicodedata
 
-#Open text file
-file = open("LOCATIONHERE", "r")
+#Load text file
+file = open("LOCATIONHERE", "r", encoding="utf-8") #Set .txt file location
 text = file.read()  #Read the file content as a string
-file.close() #Close after reading file
+file.close() #Close the file
 
-#Filter text to remove spaces, and make all characters lowercase
+#Filter text to better count characters
 def filter_text(text):
-    #Replace spaces and make lowercase
-    filtered_text = text.replace(' ', '').lower()
+    normalized_text = unicodedata.normalize('NFKC', text)
+    #Remove spaces
+    filtered_text = ''.join(normalized_text.split())
     return filtered_text
 
 #Count characters in filtered text string
 def countchr(filtered_text):
-    # Use Counter to count occurrences of each alphanumeric character
-    counter = Counter(char for char in filtered_text if char.isalnum())
+    counter = Counter(filtered_text)
     return counter
 
-#Filter the text and count the characters
+#Filter text and count characters
 filtered_text = filter_text(text)
 char_count = countchr(filtered_text)
 
-#List the count of each character a-z, 0-9
+#List the sorted count of each character
 for char in sorted(char_count):
-    print(f"{char}: {char_count[char]}")
+    print(f"{char} (U+{ord(char):04X}): {char_count[char]}")
