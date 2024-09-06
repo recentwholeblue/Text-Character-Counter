@@ -1,2 +1,2 @@
 # Text-Character-Counter
-Loads a .txt  file to count and list the amount of each character in the alphabet
+Loads a .txt file and count the occurrences of each character supported in Unicode
