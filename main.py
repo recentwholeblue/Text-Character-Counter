@@ -3,8 +3,8 @@ from collections import Counter
 
 #Open text file
 file = open("LOCATIONHERE", "r")
-text = file.read()  # Read the file content as a string
-file.close()  # Always close the file
+text = file.read()  #Read the file content as a string
+file.close() #Close after reading file
 
 #Filter text to remove spaces, and make all characters lowercase
 def filter_text(text):
